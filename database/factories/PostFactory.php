@@ -23,8 +23,6 @@ class PostFactory extends Factory
             'preview' => $this->faker->text(50),
             'thumbnail' => $this->faker->unique()->text(15) . '.jpg',
             'updated_at' => $this->faker->dateTime(),
-
-
         ];
     }
 }
