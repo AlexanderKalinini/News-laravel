@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'created_at' => $this->faker->dateTime(),
             'description' => $this->faker->text(50),
             'preview' => $this->faker->text(50),
-            'thumbnail' => $this->faker->unique()->text(15) . '.jpg',
+            'thumbnail' => $this->faker->unique()->image(null, 600, 600),
             'updated_at' => $this->faker->dateTime(),
         ];
     }

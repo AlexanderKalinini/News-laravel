@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Greeting;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class AuthController extends Controller
 {
@@ -40,9 +44,14 @@ class AuthController extends Controller
 
         ]);
 
+
+
+
         if ($user) {
             auth('web')->login($user);
         }
+        dump($data['email']);
+        Mail::to($data['email'])->send(new Greeting('Добро пожаловать'));
 
         return redirect(route('home'));
     }
@@ -55,7 +64,7 @@ class AuthController extends Controller
         ]);
 
         if (auth('web')->attempt($data)) {
-            return redirect(route('home'));
+            return redirect(route('/'));
         }
 
         return redirect(route('login'))->withErrors(['email' => 'Почта или пароль введены не правильно']);

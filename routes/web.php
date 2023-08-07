@@ -24,7 +24,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login_process', [AuthController::class, 'login'])->name('log_proc');
 
-
     Route::get('/reg', [AuthController::class, 'showRegistration'])->name('reg');
     Route::post('/reg_process', [AuthController::class, 'registration'])->name('reg_process');
 
