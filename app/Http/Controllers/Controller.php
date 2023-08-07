@@ -6,6 +6,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Post;
+
 
 class Controller extends BaseController
 {
@@ -13,6 +15,8 @@ class Controller extends BaseController
 
     public function index(): View
     {
-        return view('post.posts_index');
+        $posts = Post::all()->sortByDesc('created_at')->take(6);
+        dump($posts);
+        return view('post.posts_index', ['posts' => $posts]);
     }
 }
