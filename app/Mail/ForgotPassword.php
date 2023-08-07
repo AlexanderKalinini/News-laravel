@@ -8,9 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
-class Greeting extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +27,9 @@ class Greeting extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope();
+        return new Envelope(
+            subject: 'Forgot Password',
+        );
     }
 
     /**
@@ -37,7 +38,7 @@ class Greeting extends Mailable
     public function content(): Content
     {
         return new Content(
-            'email.greeting'
+            view: 'email.forgot',
         );
     }
 

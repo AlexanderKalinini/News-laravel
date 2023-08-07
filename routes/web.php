@@ -28,4 +28,5 @@ Route::middleware('guest')->group(function () {
     Route::post('/reg_process', [AuthController::class, 'registration'])->name('reg_process');
 
     Route::get('/forgot', [AuthController::class, 'showForgotPassword'])->name('forgot');
+    Route::post('/forgot_proc', [AuthController::class, 'forgotProcess'])->name('forgot_proc');
 });
