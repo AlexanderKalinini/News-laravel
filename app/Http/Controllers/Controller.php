@@ -11,12 +11,14 @@ use App\Models\Post;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+  use AuthorizesRequests, ValidatesRequests;
 
-    public function index(): View
-    {
-        $posts = Post::all()->sortByDesc('created_at')->take(6);
-        dump($posts);
-        return view('post.posts_index', ['posts' => $posts]);
-    }
+  public function index(): View
+  {
+    // $posts = Post::all()->sortByDesc('created_at')->take(7);
+    $posts = Post::select('title', 'thumbnail')->orderByDesc('created_at')->paginate(6);
+
+
+    return view('post.posts_index', ['posts' => $posts]);
+  }
 }

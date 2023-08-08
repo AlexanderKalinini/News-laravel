@@ -1,55 +1,53 @@
 @extends('layout.layout')
 @section('title')
-    Home
+  Home
 @endsection
 @section('content')
-    <nav class="font-sans flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-6 bg-white shadow sm:items-baseline w-full">
-        <div class="mb-2 sm:mb-0 inner">
-            <a href={{route('home')}} class="text-2xl no-underline text-grey-darkest hover:text-blue-dark font-sans font-bold">Home</a><br>
-            <span class="text-xs text-grey-dark">Заголовок</span>
-        </div>
-
-        <div class="sm:mb-0 self-center">
-            @auth('web')
-            <a href={{route('logout')}} class="text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">
-               Выйти</a>
-            @endauth
-
-            @guest('web')
-               <a href={{route('login')}} class="text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">
-               Войти</a>
-            @endguest
-            <!--
-            <a href="#" class="text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">Выйти</a>
-            -->
-        </div>
-    </nav>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 mb-20">
-
-        @foreach ($posts as $post)
-            <div class="px-4 py-8 max-w-xl">
-            <div class="bg-white shadow-2xl">
-                <div>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/600" alt="Post 1" />
-                    </a>
-                </div>
-
-                <div class="px-4 py-2 mt-2 bg-white">
-                    <h2 class="font-bold text-2xl text-gray-800">{{$post->title}}</h2>
-
-                    <p class="sm:text-sm text-xs text-gray-700 px-2 mr-1 my-3">
-                        {{$post->preview}}
-                    </p>
-                </div>
-            </div>
-        </div>
-        @endforeach
-
-
-
-
-
+  <nav
+    class="flex w-full flex-col content-center bg-white px-6 py-2 text-center font-sans shadow sm:flex-row sm:items-baseline sm:justify-between sm:text-left">
+    <div class="inner mb-2 sm:mb-0">
+      <a href={{ route('home') }}
+        class="text-grey-darkest hover:text-blue-dark font-sans text-2xl font-bold no-underline">Home</a><br>
+      <span class="text-grey-dark text-xs">Заголовок</span>
     </div>
+
+    <div class="self-center sm:mb-0">
+      @auth('web')
+        <a href={{ route('logout') }} class="text-md text-grey-darker hover:text-blue-dark ml-2 px-1 no-underline">
+          Выйти</a>
+      @endauth
+
+      @guest('web')
+        <a href={{ route('login') }} class="text-md text-grey-darker hover:text-blue-dark ml-2 px-1 no-underline">
+          Войти</a>
+      @endguest
+      <!--
+                                <a href="#" class="text-md text-grey-darker hover:text-blue-dark ml-2 px-1 no-underline">Выйти</a>
+                                -->
+    </div>
+  </nav>
+
+  <div class="mb-20 mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
+
+    @foreach ($posts as $post)
+      <div class="max-w-xl px-4 py-8">
+        <div class="bg-white shadow-2xl">
+          <div>
+            <a href="#">
+              <img src="https://via.placeholder.com/600" alt="Post 1" />
+            </a>
+          </div>
+
+          <div class="mt-2 bg-white px-4 py-2">
+            <h2 class="text-2xl font-bold text-gray-800">{{ $post->title }}</h2>
+
+            <p class="my-3 mr-1 px-2 text-xs text-gray-700 sm:text-sm">
+              {{ $post->preview }}
+            </p>
+          </div>
+        </div>
+      </div>
+    @endforeach
+    {{ $posts->links() }}
+  </div>
 @endsection
