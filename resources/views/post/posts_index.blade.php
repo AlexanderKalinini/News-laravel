@@ -4,7 +4,7 @@
 @endsection
 @section('content')
   @include('layout.partials.nav')
-  <div class="mb-20 mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
+  <div class="mb-12 mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
 
     @foreach ($posts as $post)
       <div class="max-w-xl px-4 py-8">

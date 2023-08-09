@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeedbackRequest;
 use App\Mail\ForgotPassword;
 use App\Mail\Greeting;
 use App\Models\User;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use App\Mail\Feedback;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -116,5 +118,18 @@ class AuthController extends Controller
       ['post_id' => $post_id, 'text' => $data['text'], 'user_id' => $data['user_id']],
     );
     return redirect(route('showPost', [$post_id]));
+  }
+
+  public function showContactForm()
+  {
+    return view('email.contact_form');
+  }
+
+  public function sendContactForm(FeedbackRequest $request)
+  {
+    $messages = $request->all();
+
+    Mail::to('bach8616@gmail.com')->send(new Feedback($messages));
+    return redirect(route('showContactForm'));
   }
 }

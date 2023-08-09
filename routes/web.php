@@ -17,6 +17,10 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/post/{id}/', [AuthController::class, 'showPost'])->name('showPost');
+
+Route::get('/showContactForm', [AuthController::class, 'showContactForm'])->name('showContactForm');
+Route::post('/sendContactForm', [AuthController::class, 'sendContactForm'])->name('sendContactForm');
+
 Route::middleware('auth')->group(function () {
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
   Route::post('/sendComment/{post_id}', [AuthController::class, 'sendComment'])->name('sendComment');
