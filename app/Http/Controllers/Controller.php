@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,9 +17,14 @@ class Controller extends BaseController
   public function index(): View
   {
     // $posts = Post::all()->sortByDesc('created_at')->take(7);
-    $posts = Post::select('title', 'thumbnail')->orderByDesc('created_at')->paginate(6);
+    $posts = Post::select('title', 'thumbnail', 'preview', 'id')->orderByDesc('created_at')->paginate(3);
 
 
-    return view('post.posts_index', ['posts' => $posts]);
+
+
+    return view('post.posts_index', [
+      'posts' => $posts,
+
+    ]);
   }
 }

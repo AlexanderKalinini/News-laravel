@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword;
 use App\Mail\Greeting;
 use App\Models\User;
+use App\Models\Post;
+use App\Http\Requests\PostRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\Comment;
 use Illuminate\Support\Str;
-
-
 
 class AuthController extends Controller
 {
@@ -97,5 +97,24 @@ class AuthController extends Controller
     auth('web')->logout();
 
     return redirect(route('home'));
+  }
+
+  public function showPost(string $id): View
+  {
+    $post = Post::select('id', 'title', 'thumbnail', 'description')->where('id', $id)->first();
+    $comments = Comment::join('users', 'comments.user_id', '=', 'users.user_id')
+      ->select('users.name', 'comments.text')->where('post_id', $id)
+      ->get();
+    return view('post.posts_show', ['post' => $post,  'comments' => $comments,]);
+  }
+
+  public function sendComment(PostRequest $request, string $post_id,)
+  {
+    $data = $request->all();
+
+    Comment::insert(
+      ['post_id' => $post_id, 'text' => $data['text'], 'user_id' => $data['user_id']],
+    );
+    return redirect(route('showPost', [$post_id]));
   }
 }
