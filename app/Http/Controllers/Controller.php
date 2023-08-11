@@ -18,10 +18,6 @@ class Controller extends BaseController
   {
     // $posts = Post::all()->sortByDesc('created_at')->take(7);
     $posts = Post::select('title', 'thumbnail', 'preview', 'id')->orderByDesc('created_at')->paginate(3);
-
-
-
-
     return view('post.posts_index', [
       'posts' => $posts,
 

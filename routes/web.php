@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,11 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', [Controller::class, 'index'])->name('home');
-Route::get('/post/{id}/', [AuthController::class, 'showPost'])->name('showPost');
+Route::get('/post/{id}', [AuthController::class, 'showPost'])->name('showPost');
+
+
+
+
 
 Route::get('/showContactForm', [AuthController::class, 'showContactForm'])->name('showContactForm');
 Route::post('/sendContactForm', [AuthController::class, 'sendContactForm'])->name('sendContactForm');
@@ -30,9 +35,13 @@ Route::middleware('guest')->group(function () {
   Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
   Route::post('/login_process', [AuthController::class, 'login'])->name('log_proc');
 
-  Route::get('/reg', [AuthController::class, 'showRegistration'])->name('reg');
-  Route::post('/reg_process', [AuthController::class, 'registration'])->name('reg_process');
+  Route::get('/reg', [AuthController::class, 'showRegistration'])
+    ->name('reg');
+  Route::post('/reg_process', [AuthController::class, 'registration'])
+    ->name('reg_process');
 
-  Route::get('/forgot', [AuthController::class, 'showForgotPassword'])->name('forgot');
-  Route::post('/forgot_proc', [AuthController::class, 'forgotProcess'])->name('forgot_proc');
+  Route::get('/forgot', [AuthController::class, 'showForgotPassword'])
+    ->name('forgot');
+  Route::post('/forgot_proc', [AuthController::class, 'forgotProcess'])
+    ->name('forgot_proc');
 });
