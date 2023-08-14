@@ -37,4 +37,11 @@ class AuthController extends Controller
 
     return redirect(route('admin.login'))->withErrors(['email' => 'Почта или пароль введены не правильно']);
   }
+
+  public function logout(): RedirectResponse
+  {
+    auth('admin')->logout();
+
+    return redirect(route('admin.login'));
+  }
 }

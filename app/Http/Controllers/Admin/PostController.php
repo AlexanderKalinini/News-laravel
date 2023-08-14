@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -14,7 +16,10 @@ class PostController extends Controller
    */
   public function index(): View
   {
-    return view('admin.admin_dashboard');
+    $posts = Post::paginate(10);
+
+
+    return view('admin.admin_table', ['posts' => $posts]);
   }
 
   /**
@@ -22,8 +27,7 @@ class PostController extends Controller
    */
   public function create(): View
   {
-    $posts = Post::paginate(10);
-    return view('admin.admin_table', ['posts' => $posts]);
+    return view('admin.admin_create_edit');
   }
 
   /**
@@ -31,7 +35,16 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-    Post::create([]);
+    $data = $request->validate([
+      'title' => ['required', 'min:3', 'string'],
+      'preview' => ['required', 'min:3', 'string'],
+      'description' => ['required', 'min:3', 'string'],
+      'thumbnail' => ['image',]
+    ]);
+
+    $data['thumbnail'] =  Storage::put('image/thumbnail', $data['thumbnail']);
+    Post::create($data);
+    return redirect(route('admin.posts.index'));
   }
 
   /**
@@ -60,9 +73,9 @@ class PostController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(string $post): RedirectResponse
   {
-    Post::destroy($id);
-    return redirect(route('admin.posts.create'));
+    Post::destroy($post);
+    return redirect(route('admin.posts.index'));
   }
 }

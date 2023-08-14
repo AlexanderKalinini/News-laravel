@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +18,6 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/post/{id}', [AuthController::class, 'showPost'])->name('showPost');
-
-
-
-
 
 Route::get('/showContactForm', [AuthController::class, 'showContactForm'])->name('showContactForm');
 Route::post('/sendContactForm', [AuthController::class, 'sendContactForm'])->name('sendContactForm');

@@ -9,7 +9,7 @@
       <div class="max-w-xl px-4 py-8">
         <div class="bg-white shadow-2xl">
           <div>
-            <img src={{ $post->thumbnail }} alt="thumbnail" />
+            <img src={{ asset('storage/' . $post->thumbnail) }} alt="thumbnail" />
           </div>
           <div class="mt-2 bg-white px-4 py-2">
             <h2 class="text-2xl font-bold text-gray-800">{{ $post->title }}</h2>
