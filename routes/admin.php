@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 
 
 /*
@@ -23,5 +24,7 @@ Route::middleware('guest:admin')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
   Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+  Route::get('posts/users', [UserController::class, 'index'])->name('posts.users');
+  Route::delete('posts/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
   Route::resource('posts', PostController::class);
 });

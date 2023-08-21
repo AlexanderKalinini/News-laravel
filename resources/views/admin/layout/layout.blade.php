@@ -32,7 +32,7 @@
         </div>
 
         <nav class="mt-10">
-          <a href="#" class="mt-4 flex items-center px-6 py-2 text-gray-100">
+          <a href={{ route('admin.posts.users') }} class="mt-4 flex items-center px-6 py-2 text-gray-100">
 
             <span class="mx-3">Пользователи</span>
           </a>

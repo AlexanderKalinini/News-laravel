@@ -19,6 +19,7 @@ class PostController extends Controller
     $posts = Post::paginate(10);
 
 
+
     return view('admin.admin_table', ['posts' => $posts]);
   }
 
@@ -42,7 +43,9 @@ class PostController extends Controller
       'thumbnail' => ['image',]
     ]);
 
-    $data['thumbnail'] =  Storage::put('image/thumbnail', $data['thumbnail']);
+    $data['thumbnail'] = isset($data['thumbnail'])
+      ? str_replace('public/', '', Storage::put('public/image', $data['thumbnail']))
+      : null;
     Post::create($data);
     return redirect(route('admin.posts.index'));
   }
@@ -59,7 +62,17 @@ class PostController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $post = Post::where('id', '=', $id)->first();
+
+
+    return view('admin.admin_edit', [
+      'id' => $id,
+      'title' => $post->title,
+      'preview' => $post->preview,
+      'description' => $post->description,
+      'thumbnail' => $post->thumbnail
+
+    ]);
   }
 
   /**
@@ -67,7 +80,25 @@ class PostController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    $data = $request->validate(
+      [
+        'title' => ['required', 'min:3', 'string'],
+        'preview' => ['required', 'min:3', 'string'],
+        'description' => ['required', 'min:3', 'string'],
+        'thumbnail' => ['image']
+      ]
+    );
+
+
+    $data['thumbnail'] = isset($data['thumbnail'])
+      ? str_replace('public/', '', Storage::put('public/image', $data['thumbnail']))
+      : null;
+
+
+
+    Post::where('id', $id)->update($data);
+
+    return redirect(route('admin.posts.index'));
   }
 
   /**
