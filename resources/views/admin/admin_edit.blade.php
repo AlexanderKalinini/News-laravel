@@ -22,7 +22,7 @@
 
         <input name="preview" type="text" class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Кратко"
           value="{{ $preview }}" />
-        <textarea name="description" type="text"
+        <textarea name="description" type="text" value="{{ old('description') }}"
           class="min-h-[300px] w-full resize-none overflow-scroll truncate rounded border border-gray-800 px-3"
           placeholder="Описание">{{ $description }}</textarea>
 

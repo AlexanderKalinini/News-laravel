@@ -11,7 +11,8 @@
 
       <form method="POST" action={{ route('admin.login_process') }} class="mt-5 space-y-5">
         @csrf
-        <input name="email" type="text" class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Email" />
+        <input name="email" type="text" value="{{ old('email') }}"
+          class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Email" />
         <input name="password" type="password" class="h-12 w-full rounded border border-gray-800 px-3"
           placeholder="Пароль" />
         @error('password')
