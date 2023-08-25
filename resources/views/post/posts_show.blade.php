@@ -23,7 +23,7 @@
 
         <div>
           <section class="mt-4 rounded-b-lg">
-            <form method="POST" action={{ route('sendComment', $post->id) }}>
+            <form method="POST" action={{ route('sendComment', $post) }}>
               @csrf
               <textarea name="text"
                 class="focus:shadow-outline mb-4 w-full rounded-lg border border-0 border-red-500 p-4 text-2xl shadow-inner"

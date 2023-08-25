@@ -45,7 +45,7 @@ class AuthController extends BaseController
         $user = User::where('email', $data['email'])->first();
 
         $password = Str::random(5);
-        $user->password = bcrypt($password);
+        $user->password = Hash::make($password);
         $user->save();
 
         Mail::to($data['email'])->send(new ForgotPassword($password));
@@ -65,7 +65,7 @@ class AuthController extends BaseController
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
 
         Mail::to($data['email'])->send(new Greeting('Добро пожаловать'));
@@ -85,6 +85,7 @@ class AuthController extends BaseController
         ]);
 
         if (auth('web')->attempt($data)) {
+
             return to_route('home');
         }
 
@@ -99,25 +100,24 @@ class AuthController extends BaseController
         return to_route('home');
     }
 
-    public function showPost(string $id): View
+    public function showPost(Post $post): View
     {
-        $post = Post::find($id);
-
-        $comments = Comment::join('users', 'comments.id', '=', 'users.id')
-            ->select('users.name', 'comments.text')->where('post_id', $id)
+        $comments = Comment::join('users', 'comments.user_id', '=', 'users.id')
+            ->select('users.name', 'comments.text')->where('post_id', $post->id)
             ->get();
-        dump($comments);
+
         return view('post.posts_show', ['post' => $post,  'comments' => $comments,]);
     }
 
-    public function sendComment(PostRequest $request, string $post_id,)
+    public function sendComment(PostRequest $request, Post $post,)
     {
         $data = $request->validated();
 
         Comment::insert(
-            ['post_id' => $post_id] + $data,
+            ['post_id' => $post->id, 'user_id' => auth()->user()->id] + $data,
         );
-        return to_route('showPost', ['id' => $post_id]);
+
+        return to_route('showPost', ['post' => $post]);
     }
 
     public function showContactForm()

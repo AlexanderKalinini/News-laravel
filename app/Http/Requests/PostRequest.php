@@ -24,11 +24,10 @@ class PostRequest extends FormRequest
     {
         return [
             'text' => ['required', 'min:3'],
-            'user_id' => ['exists:users']
         ];
     }
-    protected function prepareForValidation(): void
-    {
-        $this->merge(['user_id' => $this->user()->user_id]);
-    }
+    // protected function prepareForValidation(): void
+    // {
+    //     $this->merge(['user_id' => $this->user()->user_id]);
+    // }
 }

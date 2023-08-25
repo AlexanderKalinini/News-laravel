@@ -10,7 +10,7 @@
       <div class="max-w-xl px-4 py-8">
         <div class="bg-white shadow-2xl">
           <div>
-            <a href={{ route('showPost', [$post->id]) }}>
+            <a href={{ route('showPost', $post) }}>
               <img
                 src={{ Str::startsWith($post->thumbnail, 'http') ? $post->thumbnail : asset('storage/' . $post->thumbnail) }}
                 alt="Post 1" />

@@ -13,12 +13,12 @@
         @csrf
         <input name="email" type="text" value="{{ old('email') }}"
           class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Email" />
+        @error('email')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <input name="password" type="password" class="h-12 w-full rounded border border-gray-800 px-3"
           placeholder="Пароль" />
         @error('password')
-          <p class="text-red-500">{{ $message }}</p>
-        @enderror
-        @error('email')
           <p class="text-red-500">{{ $message }}</p>
         @enderror
 
