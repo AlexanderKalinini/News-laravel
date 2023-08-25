@@ -7,10 +7,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-
-
-
-
 class UserController extends BaseController
 {
     public function index(): View

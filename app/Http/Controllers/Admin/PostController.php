@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\AdminPostRequest;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -75,7 +74,7 @@ class PostController extends BaseController
             ? str_replace('public/', '', Storage::put('public/image', $data['thumbnail']))
             : null;
 
-        $post->insert($data);
+        $post->update($data);
 
         return to_route('admin.posts.index');
     }
