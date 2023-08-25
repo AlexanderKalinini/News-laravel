@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 
-class PostRequest extends FormRequest
+class AdminPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,10 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => ['required', 'min:3'],
-            'user_id' => ['exists:users']
+            'title' => ['required', 'min:3', 'string'],
+            'preview' => ['required', 'min:3', 'string'],
+            'description' => ['required', 'min:3', 'string'],
+            'thumbnail' => ['image']
         ];
-    }
-    protected function prepareForValidation(): void
-    {
-        $this->merge(['user_id' => $this->user()->user_id]);
     }
 }

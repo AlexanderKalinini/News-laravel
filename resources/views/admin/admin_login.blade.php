@@ -17,8 +17,14 @@
       <form method="POST" action="" class="mt-5 space-y-5">
         <input name="email" type="text" value="{{ old('email') }}"
           class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Email" />
+        @error('email')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <input name="password" type="password" class="h-12 w-full rounded border border-gray-800 px-3"
           placeholder="Пароль" />
+        @error('password')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <button type="submit"
           class="w-full rounded-md bg-blue-900 py-3 text-center font-medium text-white">Войти</button>
       </form>

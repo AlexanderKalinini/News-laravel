@@ -17,19 +17,27 @@
         @csrf
         <input name="title" value="{{ old('title') }}" type="text"
           class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Название" value="" />
-
+        @error('title')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <input name="preview" type="text" value="{{ old('preview') }}"
           class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Кратко" value="" />
-
+        @error('preview')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <input name="description" type="text" value="{{ old('description') }}"
           class="h-12 w-full rounded border border-gray-800 px-3" placeholder="Описание" value="" />
-
+        @error('description')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <div>
           <img class="h-64 w-64" src="https://via.placeholder.com/600" alt="">
         </div>
 
         <input name="thumbnail" value="{{ old('thumbnail') }}" type="file" class="h-12 w-full" placeholder="Обложка" />
-
+        @error('thumbnail')
+          <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <button type="submit"
           class="w-full rounded-md bg-blue-900 py-3 text-center font-medium text-white">Сохранить</button>
       </form>

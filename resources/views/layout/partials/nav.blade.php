@@ -4,7 +4,7 @@
       <a href={{ route('home') }}
         class="text-grey-darkest hover:text-blue-dark font-sans text-2xl font-bold no-underline">На главную
         страницу</a><br>
-      <a href={{ route('showContactForm') }}>Обратная связь</a>
+      <a class="text-rose-500" href={{ route('showContactForm') }}>Обратная связь</a>
     </div>
 
     <div class="self-center sm:mb-0">

@@ -32,7 +32,7 @@
 
                   <td
                     class="whitespace-no-wrap border-b border-gray-200 px-6 py-4 text-right text-sm font-medium leading-5">
-                    <form action={{ route('admin.users.destroy', $user->user_id) }} method="POST">
+                    <form action={{ route('admin.users.destroy', $user) }} method="POST">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="text-red-600 hover:text-red-900">Удалить</button>

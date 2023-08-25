@@ -3,45 +3,43 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\RedirectResponse;
-use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+
+class AuthController extends BaseController
 {
-  public function index(): View
-  {
-    // Admin::insert([
-    //   'name' => 'Alex',
-    //   'email' => 'prourist86@yandex.ru',
-    //   'password' => bcrypt('123456')
-    // ]);
-    return view('admin.login');
-  }
-
-  public function login(Request $request): RedirectResponse
-  {
-
-    $data = $request->validate([
-      'email' => ['required', 'email', 'string'],
-      'password' => ['required'],
-    ]);
-
-
-    if (auth('admin')->attempt($data)) {
-
-      return redirect(route('admin.posts.index'));
+    public function index(): View
+    {
+        // Admin::insert([
+        //   'name' => 'Alex',
+        //   'email' => 'prourist86@yandex.ru',
+        //   'password' => bcrypt('123456')
+        // ]);
+        return view('admin.login');
     }
 
-    return redirect(route('admin.login'))->withErrors(['email' => 'Почта или пароль введены не правильно']);
-  }
+    public function login(Request $request): RedirectResponse
+    {
 
-  public function logout(): RedirectResponse
-  {
-    auth('admin')->logout();
+        $data = $request->validate([
+            'email' => ['required', 'email', 'string'],
+            'password' => ['required'],
+        ]);
 
-    return redirect(route('admin.login'));
-  }
+
+        if (auth('admin')->attempt($data)) {
+            return to_route('admin.posts.index');
+        }
+
+        return to_route('admin.login')->withErrors(['email' => 'Почта или пароль введены не правильно']);
+    }
+
+    public function logout(): RedirectResponse
+    {
+        auth('admin')->logout();
+        session()->flush();
+        return to_route('admin.login');
+    }
 }

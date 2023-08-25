@@ -3,28 +3,28 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use PharIo\Manifest\Email;
+
 
 class FeedbackRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
-  public function authorize(): bool
-  {
-    return true;
-  }
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-   */
-  public function rules(): array
-  {
-    return [
-      'email' => ['email', 'required', 'string'],
-      'text' => ['string', 'min:5', 'required']
-    ];
-  }
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'email' => ['email', 'required', 'string'],
+            'text' => ['string', 'min:5', 'required']
+        ];
+    }
 }

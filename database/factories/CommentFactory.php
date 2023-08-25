@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CommentFactory extends Factory
 {
-  /**
-   * Define the model's default state.
-   *
-   * @return array<string, mixed>
-   */
-  public function definition(): array
-  {
-    return [
-      'user_id' => $this->faker->numberBetween(1, 25),
-      'post_id' => $this->faker->numberBetween(1, 25),
-      'text' => $this->faker->paragraph(3, true)
-    ];
-  }
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'user_id' => $this->faker->numberBetween(1, 25),
+            'post_id' => $this->faker->numberBetween(1, 25),
+            'text' => $this->faker->paragraph(3, true)
+        ];
+    }
 }
