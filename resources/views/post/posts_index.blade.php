@@ -16,10 +16,8 @@
                 alt="Post 1" />
             </a>
           </div>
-
           <div class="mt-2 bg-white px-4 py-2">
             <h2 class="text-2xl font-bold text-gray-800">{{ $post->title }}</h2>
-
             <p class="my-3 mr-1 px-2 text-xs text-gray-700 sm:text-sm">
               {{ $post->preview }}
             </p>
@@ -27,6 +25,6 @@
         </div>
       </div>
     @endforeach
-    {{ $posts->links('vendor.pagination.tailwind') }}
+    {{ $posts->render('vendor.pagination.tailwind') }}
   </div>
 @endsection
