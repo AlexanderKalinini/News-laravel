@@ -39,7 +39,7 @@
                 <div
                   class="mb-4 flex flex-col items-center justify-center rounded-lg bg-white p-3 shadow-lg md:items-start">
                   <div class="mr-2 flex flex-row justify-center">
-                    <h3 class="text-center text-lg font-semibold text-purple-600 md:text-left">{{ $comment->name }}
+                    <h3 class="text-center text-lg font-semibold text-purple-600 md:text-left">{{ $comment->user->name }}
                     </h3>
                   </div>
                   <p style="width: 90%" class="text-center text-lg text-gray-600 md:text-left">{{ $comment->text }}</p>

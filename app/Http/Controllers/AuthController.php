@@ -95,7 +95,6 @@ class AuthController
     public function showPost(Post $post): View
     {
         $comments = $post->comments;
-
         return view('post.posts_show', ['post' => $post,  'comments' => $comments,]);
     }
 
@@ -120,7 +119,6 @@ class AuthController
         $messages = $request->all();
 
         $admin = Admin::select('email')->orderBy('created_at')->first();
-
 
         Mail::to($admin)->send(new Feedback($messages));
 
