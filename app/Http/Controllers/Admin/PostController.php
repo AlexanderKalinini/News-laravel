@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AdminPostRequest;
-use Illuminate\Routing\Controller as BaseController;
+
 use Illuminate\Contracts\View\View;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
 
-class PostController extends BaseController
+class PostController
 {
     /**
      * Display a listing of the resource.

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller as BaseController;
+
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
 
-class AuthController extends BaseController
+class AuthController
 {
     public function index(): View
     {

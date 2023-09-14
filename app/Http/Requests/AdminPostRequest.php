@@ -23,7 +23,7 @@ class AdminPostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'min:3', 'string'],
-            'preview' => ['required', 'min:3', 'string'],
+            'preview' => ['required', 'min:3', 'string', 'max:500'],
             'description' => ['required', 'min:3', 'string'],
             'thumbnail' => ['image']
         ];

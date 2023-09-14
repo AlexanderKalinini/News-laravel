@@ -8,10 +8,9 @@ use App\Models\{User, Post, Comment};
 use App\Models\Admin;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\{RedirectResponse, Request};
-use Illuminate\Support\{Facades\Mail, Facades\Hash, Str};
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\{Facades\Mail, Facades\Hash, Str};;
 
-class AuthController extends BaseController
+class AuthController
 {
     public function showRegistration(): View
     {
@@ -49,8 +48,8 @@ class AuthController extends BaseController
     public function registration(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
+            'name' => ['required', 'string', 'min:3', 'unique:users', 'max:32'],
+            'email' => ['required', 'email', 'unique:users', 'max:50'],
             'password' => ['required', 'min:3', 'confirmed'],
         ]);
 
@@ -89,14 +88,13 @@ class AuthController extends BaseController
     {
         auth('web')->logout();
         session()->flush();
+
         return to_route('home');
     }
 
     public function showPost(Post $post): View
     {
-        $comments = Comment::join('users', 'comments.user_id', '=', 'users.id')
-            ->select('users.name', 'comments.text')->where('post_id', $post->id)
-            ->get();
+        $comments = $post->comments;
 
         return view('post.posts_show', ['post' => $post,  'comments' => $comments,]);
     }
@@ -105,7 +103,7 @@ class AuthController extends BaseController
     {
         $data = $request->validated();
 
-        Comment::insert(
+        Comment::create(
             ['post_id' => $post->id, 'user_id' => auth()->user()->id] + $data,
         );
 
@@ -120,10 +118,12 @@ class AuthController extends BaseController
     public function sendContactForm(FeedbackRequest $request)
     {
         $messages = $request->all();
-        $email = Admin::select('email')->orderBy('created_at')->first();
+
+        $admin = Admin::select('email')->orderBy('created_at')->first();
 
 
-        Mail::to($email)->send(new Feedback($messages));
+        Mail::to($admin)->send(new Feedback($messages));
+
         return to_route('showContactForm');
     }
 }

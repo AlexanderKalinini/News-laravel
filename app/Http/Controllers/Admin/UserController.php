@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use Illuminate\Routing\Controller as BaseController;
+
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class UserController extends BaseController
+class UserController
 {
     public function index(): View
     {
