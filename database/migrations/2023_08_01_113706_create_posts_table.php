@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->timestamp('created_at')->nullable();
             $table->text('description')->nullable();
             $table->string('preview', 50)->nullable();
             $table->string('thumbnail')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -2,22 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FeedbackRequest;
-use App\Mail\ForgotPassword;
-use App\Mail\Greeting;
-use App\Models\User;
-use App\Models\Post;
-use App\Http\Requests\PostRequest;
-use App\Mail\Feedback;
+use App\Http\{Requests\FeedbackRequest, Requests\PostRequest};
+use App\Mail\{ForgotPassword, Greeting, Feedback};
+use App\Models\{User, Post, Comment};
 use App\Models\Admin;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Comment;
-use Illuminate\Support\Str;
+use Illuminate\Http\{RedirectResponse, Request};
+use Illuminate\Support\{Facades\Mail, Facades\Hash, Str};
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
@@ -65,7 +57,7 @@ class AuthController extends BaseController
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
 
         Mail::to($data['email'])->send(new Greeting('Добро пожаловать'));
